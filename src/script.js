@@ -15,7 +15,7 @@ async function restar() {
     const num2 = document.getElementById("num2").value;
 
     if (num1 !== "" && num2 !== "") {
-        const response = await fetch(`/subtract/${num1}/${num2}`);
+        const response = await fetch(`/diff/${num1}/${num2}`);
         const result = await response.text();
         document.getElementById("resultado").textContent = result;
     }
