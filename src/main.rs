@@ -1,3 +1,5 @@
+
+
 /**
  * This is a simple calculator web app that uses actix-web
  *  to serve the web app and perform the calculations.
@@ -28,6 +30,7 @@ async fn diff(path: web::Path<(i32, i32)>) -> impl Responder {
     let (a, b) = path.into_inner();
     let result: i32 = a - b;
     HttpResponse::Ok().body(format!("±{}", result))
+    // The absolute value of the difference IS commutative 
 }
 
 #[get("/add/{a}/{b}")]
@@ -43,7 +46,7 @@ async fn add(path: web::Path<(i32, i32)>) -> impl Responder {
 #[get("/multiply/{a}/{b}")]
 async fn multiply(path: web::Path<(i32, i32)>) -> impl Responder {
     let (a, b) = path.into_inner();
-    let result: i32 = a * b;
+    let result: i64 = a as i64 * b as i64;
     HttpResponse::Ok().body(result.to_string())
     // Multiplication is commutative!!
 }
@@ -65,10 +68,10 @@ async fn divide(path: web::Path<(i32, i32)>) -> impl Responder {
 #[get("/pow/{a}/{b}")]
 async fn pow(path: web::Path<(i32, i32)>) -> impl Responder {
     let (a, b) = path.into_inner();
-    let b: u32  = b as u32;
-    let a: u32 = a as u32;
-    let result1: u32 = a.pow(b);
-    let result2: u32 = b.pow(a as u32);
+    let b: f64  = b as f64;
+    let a: f64 = a as f64;
+    let result1: f64 = a.powf(b);
+    let result2: f64 = b.powf(a);
     HttpResponse::Ok().body(format!("n1 ^ n2 = {} AND n2 ^ n1 = {}", result1, result2))
 }
 /**
