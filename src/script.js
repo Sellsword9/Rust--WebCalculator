@@ -46,8 +46,9 @@ async function dividir() {
 async function potencia() {
     const num1 = document.getElementById("num1").value;
     const num2 = document.getElementById("num2").value;
-
-    if (num1 !== "" && num2 !== "") {
+    if (num1 > 20 || num2 > 20) {
+        alert("20 es el valor máximo permitido para la operación de potencia, ninguno de los dos números puede ser mayor.");
+    }else if (num1 !== "" && num2 !== "") {
         const response = await fetch(`/pow/${num1}/${num2}`);
         const result = await response.text();
         document.getElementById("resultado").textContent = result;
