@@ -1,5 +1,5 @@
 use actix_web::{get, web, App, HttpServer, HttpResponse, Responder};
-
+use actix_files::Files;
 
 #[get("/subtract/{a}/{b}")]
 async fn subtract(path: web::Path<(i32, i32)>) -> impl Responder {
@@ -21,6 +21,7 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .service(add)
             .service(subtract)
+            .service(Files::new("/", "src").index_file("index.html"))
     })
     .bind("127.0.0.1:8080")?
     .run()
